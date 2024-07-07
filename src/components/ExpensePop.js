@@ -27,11 +27,6 @@ const ExpensePop = ({setValid}) => {
       "category": spentOn,
       "description": description,
     }
-    fetch('http://192.168.1.36:3000/api/expense' ,{
-      method:'POST',
-      headers:{'content-Type':'application/json'},
-      body: JSON.stringify(newItem)
-    })
     addExpense(newItem)
     setModalVisible(false)
     setValid(true)

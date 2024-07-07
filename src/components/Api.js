@@ -24,7 +24,7 @@ const addExpense = (newItem) => {
       body: JSON.stringify(newItem)
     })
     .then(response => response.json())
-    .then(data => console.log('added new item',data))
+    .then(data => console.log('added item',data))
     .catch(error => console.log('Error',error))
 }
 

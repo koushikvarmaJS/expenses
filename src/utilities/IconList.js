@@ -32,8 +32,8 @@ const IconList = {
         color:'darkblue'
     },
     Others:{
-        icon:'cart-online',
-        color:'black'
+        icon:'cart-outline',
+        color:'teal'
     }
 }
 
