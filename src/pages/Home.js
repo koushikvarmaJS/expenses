@@ -1,7 +1,7 @@
 import React from "react";
 import { useState,useEffect } from "react";
 import { View,StyleSheet,SafeAreaView,Text,FlatList } from "react-native";
-import { getBalance } from "../components/Api"
+import { getBalance,getRecentTransactions } from "../components/Api"
 import Icon from "../components/Icon";
 import ExpenseList from "../components/ExpenseList";
 import ExpensePop from "../components/ExpensePop";
@@ -11,9 +11,17 @@ import IconList from "../utilities/IconList";
 const Home = () => {
     const [balance,setBalance] = useState("no money")
     const [dataList,setDataList] = useState([])
-    const [showProfie, setShowProfile] = useState(false)
-    useEffect(()=> { getBalance(setBalance) },[])
-    useEffect(()=> {},[])
+    const [valid,setValid] = useState(true)
+    const fetchData = () => {
+        getBalance(setBalance)
+        getRecentTransactions(setDataList)
+    }
+    useEffect (() => {
+        if (valid){
+            fetchData()
+            setValid(false)
+        }
+    },[valid])
 
     const renderItem = ({ item }) => {
         const category = item.category
@@ -43,7 +51,7 @@ const Home = () => {
                     <Text style={styles.balanceValue}>{balance}</Text>
                 </View>
                 <View>
-                    <ExpensePop />
+                    <ExpensePop setValid={setValid}/>
                 </View>
             </View>
             <View style={[{paddingHorizontal:20},{marginTop:20}]}>

@@ -12,8 +12,9 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import CatList from "../utilities/CatList";
+import { addExpense } from "./Api";
 
-const ExpensePop = () => {
+const ExpensePop = ({setValid}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [amount, setAmount] = useState("");
   const [spentOn, setSpentOn] = useState("");
@@ -31,10 +32,9 @@ const ExpensePop = () => {
       headers:{'content-Type':'application/json'},
       body: JSON.stringify(newItem)
     })
-    .then(response => response.json())
-    .then(data => console.log('added new item',data))
-    .catch(error => console.log('Error',error))
+    addExpense(newItem)
     setModalVisible(false)
+    setValid(true)
   }
   return (
     <View style={styles.container}>

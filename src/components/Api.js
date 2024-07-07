@@ -17,4 +17,15 @@ const getRecentTransactions = (setDataList) => {
     .catch(error => console.error('error loading data',error))
 }
 
-export default {getBalance, getRecentTransactions}
+const addExpense = (newItem) => {
+    fetch('http://192.168.1.36:3000/api/expense' ,{
+      method:'POST',
+      headers:{'content-Type':'application/json'},
+      body: JSON.stringify(newItem)
+    })
+    .then(response => response.json())
+    .then(data => console.log('added new item',data))
+    .catch(error => console.log('Error',error))
+}
+
+module.exports = { getBalance,getRecentTransactions,addExpense }
