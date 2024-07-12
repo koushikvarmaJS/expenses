@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import CatList from "../utilities/CatList";
-import { addExpense } from "./Api";
+import { addExpense,addIncome } from "./Api";
 
 const ExpensePop = ({setValid}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -21,15 +21,25 @@ const ExpensePop = ({setValid}) => {
   const [description, setDescription] = useState("");
   const categories = CatList;
   const handleSave = () => {
-    const newItem = {
-      "user": "1",
-      "amount": amount,
-      "category": spentOn,
-      "description": description,
+    if (spentOn==='Income'){
+        const newItem = {
+        "user": "1",
+        "amount": amount,
+      }
+      addIncome(newItem)
+      setModalVisible(false)
+      setValid(true)
+    }else{
+      const newItem = {
+        "user": "1",
+        "amount": amount,
+        "category": spentOn,
+        "description": description,
+      }
+      addExpense(newItem)
+      setModalVisible(false)
+      setValid(true)
     }
-    addExpense(newItem)
-    setModalVisible(false)
-    setValid(true)
   }
   return (
     <View style={styles.container}>

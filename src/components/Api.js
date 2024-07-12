@@ -1,5 +1,5 @@
 const getBalance = (setBalance) => {
-    fetch('http://192.168.1.36:3000/api/balance?user=1')
+    fetch('http://192.168.1.35:3000/api/balance?user=1')
     .then(response => response.json())
     .then(data =>{
         // console.log('fetched data',data)
@@ -9,7 +9,7 @@ const getBalance = (setBalance) => {
 }
 
 const getRecentTransactions = (setDataList) => {
-    fetch('http://192.168.1.36:3000/api/recents?user=1')
+    fetch('http://192.168.1.35:3000/api/recents?user=1')
     .then(response => response.json())
     .then(data =>{
         // console.log('fetched data',data) 
@@ -18,7 +18,7 @@ const getRecentTransactions = (setDataList) => {
 }
 
 const addExpense = (newItem) => {
-    fetch('http://192.168.1.36:3000/api/expense' ,{
+    fetch('http://192.168.1.35:3000/api/expense' ,{
       method:'POST',
       headers:{'content-Type':'application/json'},
       body: JSON.stringify(newItem)
@@ -28,4 +28,15 @@ const addExpense = (newItem) => {
     .catch(error => console.log('Error',error))
 }
 
-module.exports = { getBalance,getRecentTransactions,addExpense }
+const addIncome = (newItem) => {
+    fetch('http://192.168.1.35:3000/api/income' ,{
+      method:'PUT',
+      headers:{'content-Type':'application/json'},
+      body: JSON.stringify(newItem)
+    })
+    .then(response => response.json())
+    .then(data => console.log('new Income',data))
+    .catch(error => console.log('Error',error))
+}
+
+module.exports = { getBalance,getRecentTransactions,addExpense,addIncome }
